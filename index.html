@@ -223,7 +223,7 @@
             background: var(--gradient-accent);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: glow 2s ease-in-out infinite alternate;
+            /*animation: glow 2s ease-in-out infinite alternate;*/
         }
 
         .hero p {
@@ -845,7 +845,7 @@
     <!-- Header -->
     <header>
         <nav>
-            <div class="logo">NEXUS TECH</div>
+            <div class="logo"><a href="#home">NEXUS TECH</a></div>
             <ul class="nav-links">
                 <li><a href="#home">Accueil</a></li>
                 <li><a href="#about">À propos</a></li>
@@ -1410,8 +1410,17 @@
     });
 
     document.querySelectorAll('.stat-number').forEach(counter => {
-        countUpObserver.observe(counter);
-    });
+    const text = counter.textContent;
+    
+    // Si le texte contient des caractères non-numériques, on skip l'animation
+    if (text.includes('/') || text.includes('%') || isNaN(parseInt(text))) {
+        return; // Ne pas appliquer l'observer sur ce texte
+    }
+    
+    countUpObserver.observe(counter);
+});
+
+    
 
     // Form submission with enhanced validation
     document.getElementById('contactForm').addEventListener('submit', (e) => {
